@@ -47,9 +47,7 @@ namespace BRALOG.webApi.Repositories
         {
             return ctx.Produtos
 
-            .Include(c => c.IdUsuarioNavigation)
-
-            .Where(c => c.IdUsuarioNavigation.IdUsuario == id)
+            .Where(p => p.IdUsuario == id)
 
             .ToList();
         }

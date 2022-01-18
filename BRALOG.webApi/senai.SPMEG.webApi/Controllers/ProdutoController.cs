@@ -91,13 +91,11 @@ namespace BRALOG.webApi.Controllers
             }
         }
 
-        [HttpGet("MeusProdutos")]
-        public IActionResult MeusProdutos()
+        [HttpGet("MeusProdutos/{idUsuario}")]
+        public IActionResult MeusProdutos(int idUsuario)
         {
             try
             {
-                int idUsuario = Convert.ToInt32(HttpContext.User.Claims.First(u => u.Type == JwtRegisteredClaimNames.Jti).Value);
-
                 return Ok(_produto.MeusProdutos(idUsuario));
             }
             catch (Exception erro)

@@ -92,20 +92,18 @@ namespace senai.BRALOG.webApi.Controllers
             }
         }
 
-        [HttpGet("MeusClientes")]
-        public IActionResult MeusProdutos()
+        [HttpGet("MeusClientes/{idUsuario}")]
+        public IActionResult MeusProdutos(int idUsuario)
         {
             try
             {
-                int idUsuario = Convert.ToInt32(HttpContext.User.Claims.First(u => u.Type == JwtRegisteredClaimNames.Jti).Value);
-
                 return Ok(_cliente.MeusClientes(idUsuario));
             }
             catch (Exception erro)
             {
                 return BadRequest(new
                 {
-                    mensagem = "Não é possível mostrar as consultas se o usuário não estiver logado!",
+                    mensagem = "Não é possível mostrar os cientes se o usuário não estiver logado!",
                     erro
                 });
             }

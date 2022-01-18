@@ -43,18 +43,11 @@ namespace senai.BRALOG.webApi.Repositories
 
         public List<Cliente> MeusClientes(int id)
         {
-            throw new NotImplementedException();
+            return ctx.Clientes
+
+           .Where(p => p.IdUsuario == id)
+
+           .ToList();
         }
-
-        //public List<Cliente> MeusClientes(int id)
-        //{
-        //    return ctx.Entregas
-
-        //    .Include(c => c.IdUsuárioNavigation)
-
-        //    .Where(c => c.IdUsuárioNavigation. == id)
-
-        //    .ToList();
-        //}
     }
 }

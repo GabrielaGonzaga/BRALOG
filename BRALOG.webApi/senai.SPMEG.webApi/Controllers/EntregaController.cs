@@ -92,24 +92,21 @@ namespace BRALOG.webApi.Controllers
             }
 
         [HttpGet("MinhasEntregas")]
-        public IActionResult MeusProdutos()
+        public IActionResult MeusProdutos(int idUsuario)
         {
             try
             {
-                int idUsuario = Convert.ToInt32(HttpContext.User.Claims.First(u => u.Type == JwtRegisteredClaimNames.Jti).Value);
-
                 return Ok(_entrega.MinhasEntregas(idUsuario));
             }
             catch (Exception erro)
             {
                 return BadRequest(new
                 {
-                    mensagem = "Não é possível mostrar as consultas se o usuário não estiver logado!",
+                    mensagem = "Não é possível mostrar os produtos se o usuário não estiver logado!",
                     erro
                 });
             }
         }
-        
-        }
     }
+}
 

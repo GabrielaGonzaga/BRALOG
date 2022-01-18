@@ -44,12 +44,9 @@ namespace BRALOG.webApi.Repositories
         public List<Entrega> MinhasEntregas(int id)
         {
             return ctx.Entregas
+           .Where(p => p.IdUsuario == id)
 
-            .Include(c => c.IdUsuarioNavigation)
-
-            .Where(c => c.IdUsuarioNavigation.IdUsuario == id)
-
-            .ToList();
+           .ToList();
         }
     }
 }

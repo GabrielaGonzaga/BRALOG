@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using senai.BRALOG.webApi.Contexts;
-using senai.BRALOG.webApi.Domains;
+﻿using BRALOG.webApi.Contexts;
+using BRALOG.webApi.Domains;
+using Microsoft.EntityFrameworkCore;
 using senai.BRALOG.webApi.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -40,5 +40,21 @@ namespace senai.BRALOG.webApi.Repositories
         {
             return ctx.Clientes.ToList();
         }
+
+        public List<Cliente> MeusClientes(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //public List<Cliente> MeusClientes(int id)
+        //{
+        //    return ctx.Entregas
+
+        //    .Include(c => c.IdUsuárioNavigation)
+
+        //    .Where(c => c.IdUsuárioNavigation. == id)
+
+        //    .ToList();
+        //}
     }
 }

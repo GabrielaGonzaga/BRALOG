@@ -1,21 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using senai.BRALOG.webApi.Domains;
+﻿using BRALOG.webApi.Domains;
+using Microsoft.AspNetCore.Mvc;
 using senai.BRALOG.webApi.Interfaces;
 using senai.BRALOG.webApi.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace senai.BRALOG.webApi.Controllers
 
-{    
+{
     [Produces("application/json")]
-     [Route("api/[controller]")]
-     [ApiController]
+    [Route("api/[controller]")]
+    [ApiController]
     public class ClienteController : Controller
     {
-        private ICliente _cliente{ get; set; }
+        private ICliente _cliente { get; set; }
 
         public ClienteController()
         {
@@ -88,6 +89,25 @@ namespace senai.BRALOG.webApi.Controllers
             catch (Exception erro)
             {
                 return BadRequest(erro);
+            }
+        }
+
+        [HttpGet("MeusClientes")]
+        public IActionResult MeusProdutos()
+        {
+            try
+            {
+                int idUsuario = Convert.ToInt32(HttpContext.User.Claims.First(u => u.Type == JwtRegisteredClaimNames.Jti).Value);
+
+                return Ok(_cliente.MeusClientes(idUsuario));
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "Não é possível mostrar as consultas se o usuário não estiver logado!",
+                    erro
+                });
             }
         }
     }

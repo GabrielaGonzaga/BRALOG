@@ -1,4 +1,4 @@
-﻿using senai.BRALOG.webApi.Domains;
+﻿using BRALOG.webApi.Domains;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,8 @@
-﻿using BRALOG.webApi.Interfaces;
-using senai.BRALOG.webApi.Contexts;
-using senai.BRALOG.webApi.Domains;
+﻿
+using BRALOG.webApi.Contexts;
+using BRALOG.webApi.Domains;
+using BRALOG.webApi.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,7 @@ namespace BRALOG.webApi.Repositories
             ctx.Produtos.Update(produtoAtualizado);
             ctx.SaveChanges();
         }
+
 
         public Produto BuscarPorId(int id)
         {
@@ -38,6 +41,17 @@ namespace BRALOG.webApi.Repositories
         public List<Produto> Listar()
         {
             return ctx.Produtos.ToList();
+        }
+
+        public List<Produto> MeusProdutos(int id)
+        {
+            return ctx.Produtos
+
+            .Include(c => c.IdUsuarioNavigation)
+
+            .Where(c => c.IdUsuarioNavigation.IdUsuario == id)
+
+            .ToList();
         }
     }
 }

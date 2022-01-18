@@ -1,4 +1,4 @@
-﻿using senai.BRALOG.webApi.Domains;
+﻿using BRALOG.webApi.Domains;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +17,7 @@ namespace BRALOG.webApi.Interfaces
         void Atualizar(Entrega produtoAtualizado);
 
         Entrega BuscarPorId(int id);
+
+        List<Entrega> MinhasEntregas(int id);
     }
 }

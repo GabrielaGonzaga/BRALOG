@@ -1,4 +1,4 @@
-﻿using senai.BRALOG.webApi.Domains;
+﻿using BRALOG.webApi.Domains;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +17,8 @@ namespace senai.BRALOG.webApi.Interfaces
         void Atualizar(Cliente produtoAtualizado);
 
         Cliente BuscarPorId(int id);
+
+        List<Cliente> MeusClientes(int id);
 
     }
 }

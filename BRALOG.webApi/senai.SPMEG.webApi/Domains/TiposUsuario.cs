@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace senai.BRALOG.webApi.Domains
+namespace BRALOG.webApi.Domains
 {
-    public partial class TipoUsuario
+    public partial class TiposUsuario
     {
-        public TipoUsuario()
+        public TiposUsuario()
         {
             Usuarios = new HashSet<Usuario>();
         }

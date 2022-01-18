@@ -1,6 +1,7 @@
-﻿using BRALOG.webApi.Interfaces;
-using senai.BRALOG.webApi.Contexts;
-using senai.BRALOG.webApi.Domains;
+﻿using BRALOG.webApi.Contexts;
+using BRALOG.webApi.Domains;
+using BRALOG.webApi.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,17 @@ namespace BRALOG.webApi.Repositories
         public List<Entrega> Listar()
         {
             return ctx.Entregas.ToList();
+        }
+
+        public List<Entrega> MinhasEntregas(int id)
+        {
+            return ctx.Entregas
+
+            .Include(c => c.IdUsuarioNavigation)
+
+            .Where(c => c.IdUsuarioNavigation.IdUsuario == id)
+
+            .ToList();
         }
     }
 }

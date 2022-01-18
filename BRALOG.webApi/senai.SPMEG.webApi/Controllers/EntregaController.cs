@@ -1,9 +1,10 @@
-﻿using BRALOG.webApi.Interfaces;
+﻿using BRALOG.webApi.Domains;
+using BRALOG.webApi.Interfaces;
 using BRALOG.webApi.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using senai.BRALOG.webApi.Domains;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -89,6 +90,26 @@ namespace BRALOG.webApi.Controllers
                     return BadRequest(erro);
                 }
             }
+
+        [HttpGet("MinhasEntregas")]
+        public IActionResult MeusProdutos()
+        {
+            try
+            {
+                int idUsuario = Convert.ToInt32(HttpContext.User.Claims.First(u => u.Type == JwtRegisteredClaimNames.Jti).Value);
+
+                return Ok(_entrega.MinhasEntregas(idUsuario));
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "Não é possível mostrar as consultas se o usuário não estiver logado!",
+                    erro
+                });
+            }
+        }
+        
         }
     }
 

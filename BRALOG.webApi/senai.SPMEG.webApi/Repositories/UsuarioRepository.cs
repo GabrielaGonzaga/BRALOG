@@ -1,5 +1,5 @@
-﻿using senai.BRALOG.webApi.Contexts;
-using senai.BRALOG.webApi.Domains;
+﻿using BRALOG.webApi.Contexts;
+using BRALOG.webApi.Domains;
 using senai.BRALOG.webApi.Interfaces;
 using System;
 using System.Collections.Generic;

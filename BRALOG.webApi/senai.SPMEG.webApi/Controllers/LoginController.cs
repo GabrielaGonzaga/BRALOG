@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BRALOG.webApi.Domains;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using senai.BRALOG.webApi.Domains;
 using senai.BRALOG.webApi.Interfaces;
 using senai.BRALOG.webApi.Repositories;
 using System;

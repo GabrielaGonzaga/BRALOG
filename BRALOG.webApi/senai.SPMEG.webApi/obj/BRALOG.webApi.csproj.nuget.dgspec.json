@@ -1,20 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gaago\\Desktop\\BRALOG.webApi\\senai.SPMEG.webApi\\BRALOG.webApi.csproj": {}
+    "C:\\Users\\Gabriela\\Desktop\\BRALOG\\BRALOG.webApi\\senai.SPMEG.webApi\\BRALOG.webApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gaago\\Desktop\\BRALOG.webApi\\senai.SPMEG.webApi\\BRALOG.webApi.csproj": {
+    "C:\\Users\\Gabriela\\Desktop\\BRALOG\\BRALOG.webApi\\senai.SPMEG.webApi\\BRALOG.webApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gaago\\Desktop\\BRALOG.webApi\\senai.SPMEG.webApi\\BRALOG.webApi.csproj",
+        "projectUniqueName": "C:\\Users\\Gabriela\\Desktop\\BRALOG\\BRALOG.webApi\\senai.SPMEG.webApi\\BRALOG.webApi.csproj",
         "projectName": "BRALOG.webApi",
-        "projectPath": "C:\\Users\\gaago\\Desktop\\BRALOG.webApi\\senai.SPMEG.webApi\\BRALOG.webApi.csproj",
-        "packagesPath": "C:\\Users\\gaago\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gaago\\Desktop\\BRALOG.webApi\\senai.SPMEG.webApi\\obj\\",
+        "projectPath": "C:\\Users\\Gabriela\\Desktop\\BRALOG\\BRALOG.webApi\\senai.SPMEG.webApi\\BRALOG.webApi.csproj",
+        "packagesPath": "C:\\Users\\Gabriela\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gabriela\\Desktop\\BRALOG\\BRALOG.webApi\\senai.SPMEG.webApi\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\gaago\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Gabriela\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -97,6 +102,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.13, 5.0.13]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -105,7 +116,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

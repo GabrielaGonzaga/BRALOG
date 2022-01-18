@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace senai.BRALOG.webApi.Domains
+namespace BRALOG.webApi.Domains
 {
-    public partial class TipoPagamento
+    public partial class TiposPagamento
     {
-        public TipoPagamento()
+        public TiposPagamento()
         {
             Entregas = new HashSet<Entrega>();
         }

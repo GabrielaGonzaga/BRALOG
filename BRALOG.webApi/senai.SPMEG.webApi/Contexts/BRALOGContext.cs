@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using senai.BRALOG.webApi.Domains;
+using BRALOG.webApi.Domains;
 
 #nullable disable
 
-namespace senai.BRALOG.webApi.Contexts
+namespace BRALOG.webApi.Contexts
 {
     public partial class BRALOGContext : DbContext
     {
@@ -22,8 +22,8 @@ namespace senai.BRALOG.webApi.Contexts
         public virtual DbSet<Entrega> Entregas { get; set; }
         public virtual DbSet<Estado> Estados { get; set; }
         public virtual DbSet<Produto> Produtos { get; set; }
-        public virtual DbSet<TipoPagamento> TipoPagamentos { get; set; }
-        public virtual DbSet<TipoUsuario> TipoUsuarios { get; set; }
+        public virtual DbSet<TiposPagamento> TiposPagamentos { get; set; }
+        public virtual DbSet<TiposUsuario> TiposUsuarios { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -31,27 +31,21 @@ namespace senai.BRALOG.webApi.Contexts
             if (!optionsBuilder.IsConfigured)
             {
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=LAPTOP-K9TOBF2M\\SQLEXPRESS; initial catalog=BRALOG;  user Id=sa; pwd=Semprepea10;");
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-TP10LGF\\SQLEXPRESS;Initial Catalog=BRALOG;User ID=sa;Password=Senha@132");
+                //optionsBuilder.UseSqlServer("Data Source=LAPTOP-K9TOBF2M\\SQLEXPRESS; initial catalog=BRALOG;  user Id=sa; pwd=Semprepea10;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
+            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
             modelBuilder.Entity<Cliente>(entity =>
             {
                 entity.HasKey(e => e.IdCliente)
-                    .HasName("PK__Clientes__885457EE41DBEAA9");
-
-                entity.Property(e => e.IdCliente).HasColumnName("idCliente");
+                    .HasName("PK__Clientes__D594664244ECC2BE");
 
                 entity.Property(e => e.Cidade)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Estado)
                     .IsRequired()
                     .HasMaxLength(200)
                     .IsUnicode(false);
@@ -70,100 +64,103 @@ namespace senai.BRALOG.webApi.Contexts
                     .IsRequired()
                     .HasMaxLength(200)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.IdEstadoNavigation)
+                    .WithMany(p => p.Clientes)
+                    .HasForeignKey(d => d.IdEstado)
+                    .HasConstraintName("FK__Clientes__IdEsta__4316F928");
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithMany(p => p.Clientes)
+                    .HasForeignKey(d => d.IdUsuario)
+                    .HasConstraintName("FK__Clientes__IdUsua__4222D4EF");
             });
 
             modelBuilder.Entity<Entrega>(entity =>
             {
                 entity.HasKey(e => e.IdEntrega)
-                    .HasName("PK__Entregas__6CA5A988C36F70B7");
+                    .HasName("PK__Entregas__6CA5A988A734F1DC");
 
                 entity.Property(e => e.IdEntrega).HasColumnName("idEntrega");
 
                 entity.Property(e => e.Cidade)
                     .IsRequired()
-                    .HasMaxLength(150)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Data).HasColumnType("datetime");
 
-                entity.Property(e => e.IdCliente).HasColumnName("idCliente");
-
-                entity.Property(e => e.IdEstado).HasColumnName("idEstado");
-
-                entity.Property(e => e.IdProduto).HasColumnName("idProduto");
-
-                entity.Property(e => e.IdTipoPag).HasColumnName("idTipoPag");
-
-                entity.Property(e => e.IdUsuário).HasColumnName("idUsuário");
-
                 entity.Property(e => e.ValorTotal)
                     .IsRequired()
-                    .HasMaxLength(150)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.IdClienteNavigation)
                     .WithMany(p => p.Entregas)
                     .HasForeignKey(d => d.IdCliente)
-                    .HasConstraintName("FK__Entregas__idClie__4E88ABD4");
+                    .HasConstraintName("FK__Entregas__IdClie__48CFD27E");
 
                 entity.HasOne(d => d.IdEstadoNavigation)
                     .WithMany(p => p.Entregas)
                     .HasForeignKey(d => d.IdEstado)
-                    .HasConstraintName("FK__Entregas__idEsta__5070F446");
+                    .HasConstraintName("FK__Entregas__IdEsta__49C3F6B7");
 
                 entity.HasOne(d => d.IdProdutoNavigation)
                     .WithMany(p => p.Entregas)
                     .HasForeignKey(d => d.IdProduto)
-                    .HasConstraintName("FK__Entregas__idProd__4CA06362");
+                    .HasConstraintName("FK__Entregas__IdProd__46E78A0C");
 
                 entity.HasOne(d => d.IdTipoPagNavigation)
                     .WithMany(p => p.Entregas)
                     .HasForeignKey(d => d.IdTipoPag)
-                    .HasConstraintName("FK__Entregas__idTipo__4F7CD00D");
+                    .HasConstraintName("FK__Entregas__IdTipo__47DBAE45");
 
-                entity.HasOne(d => d.IdUsuárioNavigation)
+                entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Entregas)
-                    .HasForeignKey(d => d.IdUsuário)
-                    .HasConstraintName("FK__Entregas__idUsuá__4D94879B");
+                    .HasForeignKey(d => d.IdUsuario)
+                    .HasConstraintName("FK__Entregas__IdUsua__45F365D3");
             });
 
             modelBuilder.Entity<Estado>(entity =>
             {
                 entity.HasKey(e => e.IdEstado)
-                    .HasName("PK__Estados__62EA894AD2E37D49");
-
-                entity.Property(e => e.IdEstado).HasColumnName("idEstado");
+                    .HasName("PK__Estados__FBB0EDC1398126DD");
 
                 entity.Property(e => e.Sigla)
                     .IsRequired()
-                    .HasMaxLength(150)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
             });
 
             modelBuilder.Entity<Produto>(entity =>
             {
                 entity.HasKey(e => e.IdProduto)
-                    .HasName("PK__Produtos__5EEDF7C3A539952C");
+                    .HasName("PK__Produtos__5EEDF7C328FA8AF2");
 
                 entity.Property(e => e.IdProduto).HasColumnName("idProduto");
 
                 entity.Property(e => e.Descricao)
                     .IsRequired()
-                    .HasMaxLength(150)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Valor)
                     .IsRequired()
-                    .HasMaxLength(150)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithMany(p => p.Produtos)
+                    .HasForeignKey(d => d.IdUsuario)
+                    .HasConstraintName("FK__Produtos__IdUsua__3F466844");
             });
 
-            modelBuilder.Entity<TipoPagamento>(entity =>
+            modelBuilder.Entity<TiposPagamento>(entity =>
             {
                 entity.HasKey(e => e.IdTipoPag)
-                    .HasName("PK__TipoPaga__FE68B05DE516CC59");
+                    .HasName("PK__TiposPag__FE68B05D951431EA");
 
-                entity.ToTable("TipoPagamento");
+                entity.ToTable("TiposPagamento");
 
                 entity.Property(e => e.IdTipoPag).HasColumnName("idTipoPag");
 
@@ -173,14 +170,12 @@ namespace senai.BRALOG.webApi.Contexts
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<TipoUsuario>(entity =>
+            modelBuilder.Entity<TiposUsuario>(entity =>
             {
                 entity.HasKey(e => e.IdTipoUsu)
-                    .HasName("PK__TipoUsua__FFD17CFBF49A215C");
+                    .HasName("PK__TiposUsu__2371A107F13AA28B");
 
-                entity.ToTable("TipoUsuario");
-
-                entity.Property(e => e.IdTipoUsu).HasColumnName("idTipoUsu");
+                entity.ToTable("TiposUsuario");
 
                 entity.Property(e => e.Descricao)
                     .IsRequired()
@@ -191,36 +186,32 @@ namespace senai.BRALOG.webApi.Contexts
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__Usuarios__645723A60F9F295A");
-
-                entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
+                    .HasName("PK__Usuarios__5B65BF9753E16DEB");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
-                    .HasMaxLength(150)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
-
-                entity.Property(e => e.IdTipoUsu).HasColumnName("idTipoUsu");
 
                 entity.Property(e => e.Nome)
                     .IsRequired()
-                    .HasMaxLength(150)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.NomeCompleto)
                     .IsRequired()
-                    .HasMaxLength(150)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Senha)
                     .IsRequired()
-                    .HasMaxLength(150)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.IdTipoUsuNavigation)
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.IdTipoUsu)
-                    .HasConstraintName("FK__Usuarios__idTipo__49C3F6B7");
+                    .HasConstraintName("FK__Usuarios__IdTipo__3A81B327");
             });
 
             OnModelCreatingPartial(modelBuilder);

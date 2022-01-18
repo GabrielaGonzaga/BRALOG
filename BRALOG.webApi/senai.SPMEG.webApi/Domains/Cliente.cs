@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace senai.BRALOG.webApi.Domains
+namespace BRALOG.webApi.Domains
 {
     public partial class Cliente
     {
@@ -13,12 +13,15 @@ namespace senai.BRALOG.webApi.Domains
         }
 
         public int IdCliente { get; set; }
+        public int? IdUsuario { get; set; }
+        public int? IdEstado { get; set; }
         public string Nome { get; set; }
         public string NomeCompleto { get; set; }
         public string Telefone { get; set; }
-        public string Estado { get; set; }
         public string Cidade { get; set; }
 
+        public virtual Estado IdEstadoNavigation { get; set; }
+        public virtual Usuario IdUsuarioNavigation { get; set; }
         public virtual ICollection<Entrega> Entregas { get; set; }
     }
 }
